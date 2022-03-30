@@ -1,12 +1,12 @@
 import jwt from "jsonwebtoken";
 
 import tokenModel from '../model/token.model';
-import {IUserCreate, IUserLogin, IUserModel} from "../type";
+import {IUserCreate, IUserModel} from "../type";
 
 class TokenService {
     generateTokens(payload: IUserCreate) {
-        const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET!, {expiresIn: '15s'})
-        const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET!, {expiresIn: '30s'})
+        const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET!, {expiresIn: '15m'})
+        const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET!, {expiresIn: '60m'})
         return {
             accessToken,
             refreshToken
@@ -42,7 +42,7 @@ class TokenService {
     }
 
     async removeToken(refreshToken: string) {
-        return await tokenModel.deleteOne(refreshToken);
+        return await tokenModel.delete(refreshToken);
     }
 
     async findToken(refreshToken: string) {

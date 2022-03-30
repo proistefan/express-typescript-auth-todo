@@ -1,8 +1,6 @@
 import {body} from "express-validator";
 import {Router} from "express";
 
-import userController from "../controller/user.controller";
-import authMiddleware from "../middleware/auth.middleware";
 import todoController from "../controller/todo.controller";
 
 // @ts-ignore
@@ -12,8 +10,8 @@ router.post('/',
   todoController.add
 );
 router.delete('/:id', todoController.delete);
-router.get('/:id', authMiddleware, todoController.get);
-router.get('/', authMiddleware, todoController.getAll);
-router.patch('/', authMiddleware, todoController.update);
+router.get('/:id', todoController.get);
+router.get('/', todoController.getAll);
+router.patch('/', todoController.update);
 
 export default router

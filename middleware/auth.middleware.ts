@@ -1,13 +1,13 @@
 import {Request, Response, NextFunction} from 'express'
 import ApiException from "../exception/api.exception";
 import tokenService from '../service/token.service';
-import {IUserLogin} from "../type";
+import {IUserModel} from "../type";
 
-export type RequestType = Request & {
-    user: IUserLogin
+export type IRequestAuth = Request & {
+    user: IUserModel
 }
 
-export default function (req: RequestType, res: Response, next: NextFunction) {
+export default function (req: IRequestAuth, res: Response, next: NextFunction) {
     try {
         const authorizationHeader = req.headers.authorization;
         if (!authorizationHeader) {
@@ -19,7 +19,7 @@ export default function (req: RequestType, res: Response, next: NextFunction) {
             return next(ApiException.UnauthorizedError());
         }
 
-        const userData = tokenService.validateAccessToken(accessToken) as IUserLogin;
+        const userData = tokenService.validateAccessToken(accessToken) as IUserModel | null;
         if (!userData) {
             return next(ApiException.UnauthorizedError());
         }

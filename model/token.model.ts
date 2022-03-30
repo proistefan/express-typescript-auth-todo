@@ -1,13 +1,13 @@
 import DbService from "../service/db.service";
-import {IToken, IUserLogin, IUserModel} from "../type";
+import {IToken, IUserModel} from "../type";
 
-interface ICreateToken {
+interface ITokenCreate {
     userId: IUserModel['id'],
     refreshToken: IToken['refreshToken']
 }
 
 class TokenModel {
-    static async create({userId, refreshToken}: ICreateToken) {
+    static async create({userId, refreshToken}: ITokenCreate) {
         const db = await DbService.read()
 
         const newToken = {
@@ -33,7 +33,7 @@ class TokenModel {
         }
     }
 
-    static async deleteOne(refreshToken: string) {
+    static async delete(refreshToken: string) {
         const db = await DbService.read()
 
         const tokenIndex = db.tokens.findIndex(dbToken => dbToken.refreshToken === refreshToken)

@@ -1,8 +1,8 @@
 import {Response, NextFunction} from "express";
 import ApiException from "../exception/api.exception";
-import {RequestType} from "./auth.middleware";
+import {IRequestAuth} from "./auth.middleware";
 
-export default function<T extends Error> (err: T, req: RequestType, res: Response, next: NextFunction) {
+export default function<T extends Error> (err: T, req: IRequestAuth, res: Response, next: NextFunction) {
     if (err instanceof ApiException) {
         return res.status(err.status).json({message: err.message, errors: err.errors})
     }

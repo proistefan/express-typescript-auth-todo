@@ -4,12 +4,10 @@ import ApiException from "../exception/api.exception";
 import {Request, Response, NextFunction} from "express";
 import UserModel from "../model/user.model";
 import {IRequestAuth} from "../middleware/auth.middleware";
-import tokenService from "../service/token.service";
 
 class UserController {
     async registration(req: Request, res: Response, next: NextFunction) {
         try {
-            console.log(req.body)
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return next(ApiException.BadRequest('Ошибка при валидации', errors.array()))

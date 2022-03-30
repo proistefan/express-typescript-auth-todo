@@ -41,6 +41,11 @@ class TodoController {
 
   async update(req: IRequestTodoUpdate, res: Response, next: NextFunction) {
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return next(ApiException.BadRequest('Ошибка при валидации', errors.array()))
+      }
+
       const {id} = req.params
       const {completed} = req.body
       const userId = req.user.id

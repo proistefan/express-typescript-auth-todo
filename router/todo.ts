@@ -9,9 +9,12 @@ router.post('/',
   body('description').isLength({min: 1}),
   todoController.add
 );
-router.delete('/:id', todoController.delete);
 router.get('/:id', todoController.get);
 router.get('/', todoController.getAll);
-router.put('/:id', todoController.update);
+router.put('/:id',
+  body('description').isLength({min: 1}),
+  todoController.update
+);
+router.delete('/:id', todoController.delete);
 
 export default router

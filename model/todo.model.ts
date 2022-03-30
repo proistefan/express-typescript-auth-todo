@@ -1,6 +1,7 @@
 import DbService from "../service/db.service";
 import {ITodo, ITodoAdd, ITodoUpdate, IUserModel} from "../type";
 import {ITodoDelete, ITodoFindOne} from "../type/todo";
+import ApiException from "../exception/api.exception";
 
 class TodoModel {
   static async create({description, userId}: ITodoAdd) {
@@ -49,9 +50,12 @@ class TodoModel {
     const db = await DbService.read()
 
     const todoIndex = db.todos.findIndex(dbTodo => dbTodo.id === id && dbTodo.userId === userId)
+    if (todoIndex === -1) {
+      throw ApiException.BadRequest('Не найдено todo с данным id')
+    }
     const deletedTodo = Object.assign(db.todos[todoIndex], {})
 
-    db.todos = db.todos.splice(todoIndex, 1)
+    db.todos.splice(todoIndex, 1)
 
     await DbService.write(db)
 

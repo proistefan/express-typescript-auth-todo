@@ -8,9 +8,9 @@ interface IUser {
 interface IUserModel extends IUser {
   id: number
 }
-interface IUserCreate extends IUser {}
+type IUserCreate = IUser
 
-interface IUserRegister extends IUser {}
+type IUserRegister = IUser
 
 interface IUserLogin {
   email: IUser['email']

@@ -5,8 +5,8 @@ import {IUserCreate, IUserModel} from "../type";
 
 class TokenService {
     generateTokens(payload: IUserCreate) {
-        const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET!, {expiresIn: '15m'})
-        const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET!, {expiresIn: '60m'})
+        const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET!, {expiresIn: '2h'})
+        const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET!, {expiresIn: '60d'})
         return {
             accessToken,
             refreshToken
@@ -14,7 +14,6 @@ class TokenService {
     }
 
     validateAccessToken(accessToken: string) {
-        console.log(accessToken)
         try {
             return jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET!);
         } catch (e) {

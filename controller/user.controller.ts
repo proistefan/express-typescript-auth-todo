@@ -1,13 +1,15 @@
 import userService from "../service/user.service";
 import {validationResult} from "express-validator";
 import ApiException from "../exception/api.exception";
-import {Response, NextFunction} from "express";
-import {IRequestAuth} from "../middleware/auth.middleware";
+import {Request, Response, NextFunction} from "express";
 import UserModel from "../model/user.model";
+import {IRequestAuth} from "../middleware/auth.middleware";
+import tokenService from "../service/token.service";
 
 class UserController {
-    async registration(req: IRequestAuth, res: Response, next: NextFunction) {
+    async registration(req: Request, res: Response, next: NextFunction) {
         try {
+            console.log(req.body)
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return next(ApiException.BadRequest('Ошибка при валидации', errors.array()))
@@ -22,7 +24,7 @@ class UserController {
         }
     }
 
-    async login(req: IRequestAuth, res: Response, next: NextFunction) {
+    async login(req: Request, res: Response, next: NextFunction) {
         try {
             const {email, password} = req.body;
             const user = await UserModel.findOne({email})
@@ -40,7 +42,8 @@ class UserController {
     async logout(req: IRequestAuth, res: Response, next: NextFunction) {
         try {
             const {refreshToken} = req.cookies;
-            const token = await userService.logout(refreshToken);
+            const userId = req.user.id
+            const token = await userService.logout(refreshToken, userId);
             res.clearCookie('refreshToken');
             return res.json(token);
         } catch (e) {
@@ -48,12 +51,20 @@ class UserController {
         }
     }
 
-    async refresh(req: IRequestAuth, res: Response, next: NextFunction) {
+    async refresh(req: Request, res: Response, next: NextFunction) {
         try {
             const {refreshToken} = req.cookies;
             const userData = await userService.refresh(refreshToken);
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
             return res.json(userData);
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async me(req: IRequestAuth, res: Response, next: NextFunction) {
+        try {
+            return res.json(req.user);
         } catch (e) {
             next(e);
         }

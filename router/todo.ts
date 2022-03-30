@@ -12,6 +12,6 @@ router.post('/',
 router.delete('/:id', todoController.delete);
 router.get('/:id', todoController.get);
 router.get('/', todoController.getAll);
-router.patch('/', todoController.update);
+router.put('/:id', todoController.update);
 
 export default router

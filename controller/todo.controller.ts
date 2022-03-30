@@ -14,7 +14,9 @@ type IRequestTodoDelete = IRequestTodoGet
 
 type IRequestTodoUpdate = IRequestAuth & {
   params: {
-    id: string,
+    id: string
+  }
+  body: {
     completed: boolean
   }
 }
@@ -39,7 +41,8 @@ class TodoController {
 
   async update(req: IRequestTodoUpdate, res: Response, next: NextFunction) {
     try {
-      const {id, completed} = req.params
+      const {id} = req.params
+      const {completed} = req.body
       const userId = req.user.id
       const todo = await todoModel.update({userId, id: +id, completed});
       return res.json(todo);
@@ -50,9 +53,9 @@ class TodoController {
 
   async delete(req: IRequestTodoDelete, res: Response, next: NextFunction) {
     try {
-      const {id} = req.params
+      const id = +req.params.id
       const userId = req.user.id
-      const todo = await todoModel.delete({userId, id: +id});
+      const todo = await todoModel.delete({userId, id});
       return res.json(todo);
     } catch (e) {
       next(e);

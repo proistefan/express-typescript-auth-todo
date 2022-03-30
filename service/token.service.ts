@@ -14,6 +14,7 @@ class TokenService {
     }
 
     validateAccessToken(accessToken: string) {
+        console.log(accessToken)
         try {
             return jwt.verify(accessToken, process.env.JWT_ACCESS_SECRET!);
         } catch (e) {

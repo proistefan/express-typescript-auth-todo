@@ -51,7 +51,11 @@ class UserService {
         return {...tokens, user: foundUser}
     }
 
-    async logout(refreshToken: string) {
+    async logout(refreshToken: string, userId: IUserModel['id']) {
+        const user = UserModel.findById(userId)
+        if (!user) {
+            throw ApiException.BadRequest('Пользователь с таким refresh token не найден')
+        }
         return await tokenService.removeToken(refreshToken);
     }
 

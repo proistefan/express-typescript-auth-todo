@@ -31,7 +31,6 @@ class TodoController {
       const { description } = req.body
       const userId = req.user.id
       const newTodo = await todoModel.create({description, userId})
-
       res.json(newTodo)
     } catch (e) {
       next(e);
@@ -42,7 +41,6 @@ class TodoController {
     try {
       const {id, completed} = req.params
       const userId = req.user.id
-
       const todo = await todoModel.update({userId, id: +id, completed});
       return res.json(todo);
     } catch (e) {
@@ -54,7 +52,6 @@ class TodoController {
     try {
       const {id} = req.params
       const userId = req.user.id
-
       const todo = await todoModel.delete({userId, id: +id});
       return res.json(todo);
     } catch (e) {
@@ -66,7 +63,6 @@ class TodoController {
     try {
       const id = +req.params.id
       const userId = req.user.id
-
       const todo = await todoModel.findOne({userId, id});
       return res.json(todo);
     } catch (e) {

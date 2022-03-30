@@ -1,5 +1,5 @@
-import DbService from "../services/db.service";
-import {IUser, IUserCreate, IUserModel} from "../types";
+import DbService from "../service/db.service";
+import {IUser, IUserCreate, IUserModel} from "../type";
 
 class UserModel {
     static async create(user: IUserCreate) {

@@ -1,6 +1,6 @@
 import asyncFs from 'fs/promises'
 import fs from 'fs'
-import {IToken, IUserModel} from "../types";
+import {IToken, IUserModel} from "../type";
 
 export interface IDb {
   users: IUserModel[]

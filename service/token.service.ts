@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
-import tokenModel from '../models/token.model';
-import {IUserCreate, IUserLogin, IUserModel} from "../types";
+import tokenModel from '../model/token.model';
+import {IUserCreate, IUserLogin, IUserModel} from "../type";
 
 class TokenService {
     generateTokens(payload: IUserCreate) {

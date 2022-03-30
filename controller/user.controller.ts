@@ -1,16 +1,16 @@
-import userService from "../services/user.service";
+import userService from "../service/user.service";
 import {validationResult} from "express-validator";
-import ApiError from "../exceptions/api.error";
+import ApiException from "../exception/api.exception";
 import {Response, NextFunction} from "express";
-import {RequestType} from "../middlewares/auth.middleware";
-import UserModel from "../models/user.model";
+import {RequestType} from "../middleware/auth.middleware";
+import UserModel from "../model/user.model";
 
 class UserController {
     async registration(req: RequestType, res: Response, next: NextFunction) {
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
-                return next(ApiError.BadRequest('Ошибка при валидации', errors.array()))
+                return next(ApiException.BadRequest('Ошибка при валидации', errors.array()))
             }
             const {email, password, age, name} = req.body;
             const userData = await userService.registration({email, password, age, name});
@@ -26,7 +26,7 @@ class UserController {
             const {email, password} = req.body;
             const user = await UserModel.findOne({email})
             if (!user) {
-                return next(ApiError.UnauthorizedError())
+                return next(ApiException.UnauthorizedError())
             }
             const userData = await userService.login({email, password});
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})

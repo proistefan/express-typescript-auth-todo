@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
 
-import UserModel from '../models/user.model';
+import UserModel from '../model/user.model';
 import tokenService from './token.service';
-import ApiError from "../exceptions/api.error";
-import {IUserLogin, IUserModel, IUserRegister} from "../types";
+import ApiException from "../exception/api.exception";
+import {IUserLogin, IUserModel, IUserRegister} from "../type";
 
 interface ILoginResult {
     user: IUserModel,
@@ -17,7 +17,7 @@ class UserService {
 
         const candidate = await UserModel.findOne({email})
         if (candidate) {
-            throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} уже существует`)
+            throw ApiException.BadRequest(`Пользователь с почтовым адресом ${email} уже существует`)
         }
 
         const hashPassword = await bcrypt.hash(password, 3);
@@ -37,12 +37,12 @@ class UserService {
     async login(user: IUserLogin): Promise<ILoginResult> {
         const foundUser = await UserModel.findOne(user)
         if (!foundUser) {
-            throw ApiError.BadRequest('Пользователь с таким email не найден')
+            throw ApiException.BadRequest('Пользователь с таким email не найден')
         }
 
         const isPasswordsEquals = await bcrypt.compare(user.password, foundUser.password);
         if (!isPasswordsEquals) {
-            throw ApiError.BadRequest('Неверный пароль');
+            throw ApiException.BadRequest('Неверный пароль');
         }
 
         const tokens = tokenService.generateTokens({...foundUser});
@@ -57,17 +57,17 @@ class UserService {
 
     async refresh(refreshToken: string): Promise<ILoginResult> {
         if (!refreshToken) {
-            throw ApiError.UnauthorizedError();
+            throw ApiException.UnauthorizedError();
         }
         const userData = tokenService.validateRefreshToken(refreshToken) as IUserModel | null;
         const tokenFromDb = await tokenService.findToken(refreshToken);
         if (!userData || !tokenFromDb) {
-            throw ApiError.UnauthorizedError();
+            throw ApiException.UnauthorizedError();
         }
 
         const user = await UserModel.findById(userData.id);
         if (!user) {
-            throw ApiError.UnauthorizedError();
+            throw ApiException.UnauthorizedError();
         }
 
         const tokens = tokenService.generateTokens({...user});

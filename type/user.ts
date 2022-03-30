@@ -17,17 +17,10 @@ interface IUserLogin {
   password: IUser['password']
 }
 
-interface IToken {
-  id: number
-  userId: IUserModel['id']
-  refreshToken: string
-}
-
 export {
   IUser,
   IUserModel,
   IUserCreate,
   IUserRegister,
   IUserLogin,
-  IToken
 }

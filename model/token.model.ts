@@ -1,5 +1,5 @@
-import DbService from "../services/db.service";
-import {IToken, IUserLogin, IUserModel} from "../types";
+import DbService from "../service/db.service";
+import {IToken, IUserLogin, IUserModel} from "../type";
 
 interface ICreateToken {
     userId: IUserModel['id'],

@@ -1,4 +1,4 @@
-export default class ApiError extends Error {
+export default class ApiException extends Error {
     status: number;
     errors: any[];
 
@@ -9,10 +9,10 @@ export default class ApiError extends Error {
     }
 
     static UnauthorizedError() {
-        return new ApiError(401, 'Пользователь не авторизован')
+        return new ApiException(401, 'Пользователь не авторизован')
     }
 
     static BadRequest(message: string, errors?: any[]) {
-        return new ApiError(400, message, errors);
+        return new ApiException(400, message, errors);
     }
 }

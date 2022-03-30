@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 dotenv.config({path: `.${process.env.NODE_ENV}.env`})
 
 import router from "./router/index";
-import errorMiddleware from "./middlewares/error.middleware";
+import errorMiddleware from "./middleware/error.middleware";
 
 const app = express()
 const port = process.env.PORT || 5000

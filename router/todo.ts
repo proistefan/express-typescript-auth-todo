@@ -12,7 +12,6 @@ router.post('/',
 router.get('/:id', todoController.get);
 router.get('/', todoController.getAll);
 router.put('/:id',
-  body('description').isLength({min: 1}),
   todoController.update
 );
 router.delete('/:id', todoController.delete);

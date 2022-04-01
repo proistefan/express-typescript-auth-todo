@@ -1,4 +1,4 @@
-export function setSuccessResponse(data: any) {
+export function setSuccessResponse(data: object = {}) {
   return {
     ok: true,
     data

@@ -42,9 +42,9 @@ class UserController {
         try {
             const {refreshToken} = req.cookies;
             const userId = req.user.id
-            const token = await userService.logout(refreshToken, userId);
+            await userService.logout(refreshToken, userId);
             res.clearCookie('refreshToken');
-            return res.json(setSuccessResponse(token));
+            return res.json(setSuccessResponse());
         } catch (e) {
             next(e);
         }

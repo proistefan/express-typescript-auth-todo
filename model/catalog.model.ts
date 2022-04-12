@@ -4,7 +4,6 @@ import {ICategory, ICategoryItem} from "../type/categories";
 import {IProduct} from "../type/product";
 import {categoryItems, categoryProductList} from "../data";
 import {getPageCount} from "../utils";
-import {IBasketItem} from "../type/basket";
 import {IDb} from "../type/db";
 
 class CatalogModel {
@@ -13,18 +12,18 @@ class CatalogModel {
 
     const { categories, products, basket } = db
     
-    let filteredProducts: ICatalogItems['items'] = []
-    
+    let filteredProducts: ICatalogItems['items']
+
     if (filters.length) {
       filteredProducts = products.filter(product => {
-        let isItemInFilter = false
+        let isItemInFilter = true
         const id = product.id
 
         for (let i = 0; i < filters.length; i++) {
           const {code, items} = filters[i]
 
-          if (CatalogModel.isItemInCategory(code, items, id, categories)) {
-            isItemInFilter = true
+          if (!CatalogModel.isItemInCategory(code, items, id, categories)) {
+            isItemInFilter = false
             break
           }
         }

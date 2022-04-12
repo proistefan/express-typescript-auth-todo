@@ -226,6 +226,19 @@ const productsToAdd: {
                 items: ['cube']
             }
         ]
+    },
+    {
+        id: 2,
+        categories: [
+            {
+                code: 'category',
+                items: ['fat', 'dvuhpodvesnie']
+            },
+            {
+                code: 'brand',
+                items: ['merida']
+            }
+        ]
     }
 ]
 

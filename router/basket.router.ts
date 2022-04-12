@@ -7,6 +7,7 @@ import basketController from "../controller/basket.controller";
 const router = new Router();
 router.post('/',
   body('id').isNumeric(),
+  body('quantity').isNumeric(),
   basketController.add
 );
 router.get('/', basketController.getAll);

@@ -10,6 +10,9 @@ export interface IBasketItem {
 
 export interface IBasketAdd {
     id: IProduct['id']
+    quantity: number
 }
 
-export interface IBasketDelete extends IBasketAdd {}
+export interface IBasketDelete {
+    id: IProduct['id']
+}

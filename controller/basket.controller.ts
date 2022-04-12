@@ -12,7 +12,8 @@ type IRequestBasketDelete = {
 
 type IRequestBasketAdd = {
   body: {
-    id: string,
+    id: number,
+    quantity: number
   }
 }
 
@@ -24,8 +25,9 @@ class BasketController {
         return next(ApiException.BadRequest('Ошибка при валидации', errors.array()))
       }
 
-      const productId = +req.body.id
-      const newBasketItem = await basketModel.add({id: productId})
+      const {id, quantity} = req.body
+      
+      const newBasketItem = await basketModel.add({id, quantity}) || {}
       res.json(setSuccessResponse(newBasketItem))
     } catch (e) {
       next(e);

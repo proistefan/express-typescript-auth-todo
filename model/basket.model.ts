@@ -4,18 +4,22 @@ import {ITodoDelete, ITodoFindOne} from "../type/todo";
 import ApiException from "../exception/api.exception";
 import {IBasketAdd, IBasketDelete, IBasketItem} from "../type/basket";
 
-class TodoModel {
-  static async add({id}: IBasketAdd) {
+class BasketModel {
+  static async add({id, quantity}: IBasketAdd) {
     const db = await DbService.read()
+    
+    if (quantity === 0) {
+      return await BasketModel.delete({id})
+    }
 
-    const existBasketItemIndex = db.basket.findIndex(item => item.id === id)
-
-    if (existBasketItemIndex >= 0) {
-      db.basket[existBasketItemIndex].count += 1
+    const existBasketItem = db.basket.find(item => item.id === id)
+    
+    if (existBasketItem) {
+      existBasketItem.count = quantity
 
       await DbService.write(db)
 
-      return db.basket[existBasketItemIndex]
+      return existBasketItem
     } else {
       const foundProduct = db.products.find(item => item.id === id)
           
@@ -27,7 +31,7 @@ class TodoModel {
       
       const newBasketItem: IBasketItem = {
         id,
-        count: 1,
+        count: quantity,
         description,
         image,
         price
@@ -63,4 +67,4 @@ class TodoModel {
   }
 }
 
-export default TodoModel
+export default BasketModel

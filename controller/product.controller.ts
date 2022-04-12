@@ -1,6 +1,5 @@
 import {validationResult} from "express-validator";
 import ApiException from "../exception/api.exception";
-// import {IRequestAuth} from "../middleware/auth.middleware";
 import {NextFunction, Request, Response} from "express";
 import ProductModel from "../model/product.model";
 import {setSuccessResponse} from "../utils";

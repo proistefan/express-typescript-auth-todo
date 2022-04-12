@@ -3,6 +3,7 @@ import user from './user.router'
 import todo from "./todo.router";
 import product from "./product.router";
 import basket from "./basket.router";
+import catalog from "./catalog.router";
 
 import authMiddleware from "../middleware/auth.middleware";
 
@@ -14,5 +15,6 @@ router.use('/todo', authMiddleware, todo)
 // router.use('/product', authMiddleware, product)
 router.use('/product', product)
 router.use('/basket', basket)
+router.use('/catalog', catalog)
 
 export default router

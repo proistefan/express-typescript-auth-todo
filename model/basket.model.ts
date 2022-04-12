@@ -65,6 +65,18 @@ class BasketModel {
 
     return
   }
+  
+  static async getSum(): Promise<number> {
+    let db = await DbService.read()
+
+    let sum = 0
+    
+    db.basket.forEach(item => {
+      sum += item.price * item.count
+    })
+
+    return sum
+  }
 }
 
 export default BasketModel

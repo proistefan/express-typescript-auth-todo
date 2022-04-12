@@ -1,24 +1,18 @@
 import asyncFs from 'fs/promises'
 import fs from 'fs'
-import {ITodo, IToken, IUserModel} from "../type";
-import {IProduct, products} from "../type/product";
-import {IBasketItem} from "../type/basket";
-
-export interface IDb {
-  users: IUserModel[]
-  tokens: IToken[]
-  todos: ITodo[]
-  products: IProduct[]
-  basket: IBasketItem[]
-}
+import {IDb} from "../type/db";
+import {categories, categoryItems, categoryProductList, products} from "../data";
 
 const dbPath = './db.json'
 const initialDb: IDb = {
   users: [],
   tokens: [],
   todos: [],
-  products,
   basket: [],
+  products,
+  categories,
+  categoryItems,
+  categoryProductList,
 }
 
 class DbService {

@@ -1,14 +1,8 @@
-export function setSuccessResponse(data: object = {}) {
-  return {
-    ok: true,
-    data
-  }
-}
+import {setSuccessResponse, setFailureResponse} from './status'
+import {getPageCount} from './catalog'
 
-export function setFailureResponse(message: string, errors?: any[]) {
-  return {
-    ok: false,
-    message,
-    errors
-  }
+export {
+  setSuccessResponse,
+  setFailureResponse,
+  getPageCount
 }

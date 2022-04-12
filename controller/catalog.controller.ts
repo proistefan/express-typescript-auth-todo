@@ -4,19 +4,10 @@ import {NextFunction, Request, Response} from "express";
 import {setSuccessResponse} from "../utils";
 import {ICatalogOptions} from "../type/catalog";
 import CatalogModel from "../model/catalog.model";
-import {ICategory, ICategoryItem} from "../type/categories";
-import {IProduct} from "../type/product";
-import {
-    categories,
-    categoryItems,
-    categoryProductList,
-    products
-} from "../data";
 
 type IRequestProductGet = Request & {
     body: ICatalogOptions
 }
-
 
 class CatalogController {
     async getItems(req: IRequestProductGet, res: Response, next: NextFunction) {

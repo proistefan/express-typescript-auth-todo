@@ -1,5 +1,6 @@
 import {IProduct} from "./type/product";
 import {ICategory, ICategoryItem, ICategoryProduct,} from "./type/categories";
+/* eslint-disable */
 
 export const products: IProduct[] = [
     {
@@ -35,7 +36,7 @@ export const products: IProduct[] = [
     {
         id: 5,
         description: 'Городской велосипед Bear Bike Амстердам (2019)',
-        image: `${process.env.API_URL}/upload/products/product5.png`,
+        image: `${process.env.API_URL}/upload/products/product2.png`,
         price: 40000
     }
 ]
@@ -142,63 +143,6 @@ export const categoryItems: ICategoryItem[] = [
         code: 'pride',
         title: 'PRIDE'
     },
-]
-
-export const categoryProductList1: ICategoryProduct[] = [
-    {
-        id: 0,
-        categoryId: 0,
-        productId: 1,
-        categoryItemId: 1
-    },
-    {
-        id: 1,
-        categoryId: 0,
-        productId: 1,
-        categoryItemId: 2
-    },
-    {
-        id: 2,
-        categoryId: 0,
-        productId: 2,
-        categoryItemId: 2
-    },
-    {
-        id: 3,
-        categoryId: 0,
-        productId: 3,
-        categoryItemId: 1
-    },
-    {
-        id: 4,
-        categoryId: 0,
-        productId: 4,
-        categoryItemId: 3
-    },
-    {
-        id: 5,
-        categoryId: 0,
-        productId: 5,
-        categoryItemId: 4
-    },
-    {
-        id: 6,
-        categoryId: 0,
-        productId: 5,
-        categoryItemId: 3
-    },
-    {
-        id: 7,
-        productId: 1,
-        categoryId: 0,
-        categoryItemId: 1
-    },
-    {
-        id: 8,
-        productId: 1,
-        categoryId: 0,
-        categoryItemId: 1
-    }
 ]
 
 export const categoryProductList: ICategoryProduct[] = [

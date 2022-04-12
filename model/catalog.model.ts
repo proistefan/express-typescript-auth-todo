@@ -4,12 +4,14 @@ import {ICategory, ICategoryItem} from "../type/categories";
 import {IProduct} from "../type/product";
 import {categoryItems, categoryProductList} from "../data";
 import {getPageCount} from "../utils";
+import {IBasketItem} from "../type/basket";
+import {IDb} from "../type/db";
 
 class CatalogModel {
   static async getItems({page, limit, sort, filters}: ICatalogOptions): Promise<ICatalogItems> {
     const db = await DbService.read()
 
-    const { categories, products } = db
+    const { categories, products, basket } = db
     
     let filteredProducts: ICatalogItems['items'] = []
     
@@ -30,14 +32,44 @@ class CatalogModel {
         return isItemInFilter
       }).map(product => ({
         ...product,
-        inBasket: false
+        inBasket: CatalogModel.isItemInBasket(product.id, basket)
       }))
     } else {
       filteredProducts = products.map(product => ({
         ...product,
-        inBasket: false
+        inBasket: CatalogModel.isItemInBasket(product.id, basket)
       }))
     }
+    
+    filteredProducts = filteredProducts.sort((a, b) => {
+      if (sort === 'alp') {
+        if (a.description > b.description) {
+          return 1
+        } else if (a.description < b.description) {
+          return -1
+        } else {
+          return 0
+        }
+      } else if (sort === 'price-up') {
+        if (a.price > b.price) {
+          return 1
+        } else if (a.price < b.price) {
+          return -1
+        } else {
+          return 0
+        }
+      } else if (sort === 'price-down') {
+        if (a.price < b.price) {
+          return 1
+        } else if (a.price > b.price) {
+          return -1
+        } else {
+          return 0
+        }
+      } else {
+        return 0
+      }
+    })
     
     filteredProducts = filteredProducts.slice((page - 1) * limit, page * limit)
 
@@ -73,7 +105,6 @@ class CatalogModel {
     return filters
   }
 
-
   private static isItemInCategory(
       categoryCode: ICategory['code'],
       categoryItemsCode: ICategoryItem['code'][],
@@ -94,6 +125,10 @@ class CatalogModel {
 
     const foundCategoryItemsIds = categoryItems.filter(item => categoryItemsCode.includes(item.code)).map(item => item.id)
     return !!foundCategoriesProduct.filter(item => foundCategoryItemsIds.includes(item.categoryItemId!)).length
+  }
+  
+  private static isItemInBasket(id: IProduct['id'], basket: IDb['basket']) {
+    return !!basket.find(item => item.id === id)
   }
 }
 

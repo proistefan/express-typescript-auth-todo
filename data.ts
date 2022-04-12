@@ -144,66 +144,121 @@ export const categoryItems: ICategoryItem[] = [
         title: 'PRIDE'
     },
 ]
+// export const categoryProductList: ICategoryProduct[] = [
+//     {
+//         id: 0,
+//         productId: 0,
+//         categoryId: 0,
+//         categoryItemId: 0
+//     },
+//     {
+//         id: 1,
+//         productId: 0,
+//         categoryId: 0,
+//         categoryItemId: 1
+//     },
+//     {
+//         id: 2,
+//         productId: 1,
+//         categoryId: 0,
+//         categoryItemId: 1
+//     },
+//     {
+//         id: 3,
+//         productId: 1,
+//         categoryId: 0,
+//         categoryItemId: 0
+//     },
+//     {
+//         id: 4,
+//         productId: 1,
+//         categoryId: 1,
+//         categoryItemId: 11
+//     },
+//     {
+//         id: 5,
+//         productId: 2,
+//         categoryId: 1,
+//         categoryItemId: 10
+//     },
+//     {
+//         id: 6,
+//         productId: 3,
+//         categoryId: 1,
+//         categoryItemId: 9
+//     },
+//     {
+//         id: 7,
+//         productId: 4,
+//         categoryId: 1,
+//         categoryItemId: 6
+//     },
+//     {
+//         id: 8,
+//         productId: 5,
+//         categoryId: 1,
+//         categoryItemId: 7
+//     },
+//     {
+//         id: 9,
+//         productId: 5,
+//         categoryId: 1,
+//         categoryItemId: 8
+//     },
+// ]
 
-export const categoryProductList: ICategoryProduct[] = [
-    {
-        id: 0,
-        productId: 0,
-        categoryId: 0,
-        categoryItemId: 0
-    },
+const productsToAdd: {
+    id: IProduct['id']
+    categories: {
+        code: ICategory['code'],
+        items: ICategoryItem['code'][]
+    }[]
+}[] = [
     {
         id: 1,
-        productId: 0,
-        categoryId: 0,
-        categoryItemId: 1
-    },
-    {
-        id: 2,
-        productId: 1,
-        categoryId: 0,
-        categoryItemId: 1
-    },
-    {
-        id: 3,
-        productId: 1,
-        categoryId: 0,
-        categoryItemId: 0
-    },
-    {
-        id: 4,
-        productId: 1,
-        categoryId: 1,
-        categoryItemId: 11
-    },
-    {
-        id: 5,
-        productId: 2,
-        categoryId: 1,
-        categoryItemId: 10
-    },
-    {
-        id: 6,
-        productId: 3,
-        categoryId: 1,
-        categoryItemId: 9
-    },
-    {
-        id: 7,
-        productId: 4,
-        categoryId: 1,
-        categoryItemId: 6
-    },
-    {
-        id: 8,
-        productId: 5,
-        categoryId: 1,
-        categoryItemId: 7
-    },
-    {
-        id: 9,
-        productId: 5,
-        categoryId: 1,
-        categoryItemId: 8
-    },
+        categories: [
+            {
+                code: 'category',
+                items: ['gornie', 'gorodskie']
+            },
+            {
+                code: 'brand',
+                items: ['cube']
+            }
+        ]
+    }
 ]
+
+export const categoryProductList: ICategoryProduct[] = addProducts()
+
+function addProducts() {
+    const itemsArr: ICategoryProduct[] = []
+    
+    productsToAdd.forEach(product => {
+        const {id: productId, categories: categoriesProduct} = product
+
+        categoriesProduct.forEach(category => {
+            const {code, items} = category
+            
+            const categoryToAdd = categories.find(item => item.code === code)
+            
+            if (!categoryToAdd) {
+                throw new Error(`Нет такой категории ${code}`)
+            }
+            
+            const itemsToAdd = categoryItems.filter(item => item.parentId === categoryToAdd.id && items.includes(item.code))
+
+            itemsToAdd.forEach(item => {
+                itemsArr.push({
+                    id: itemsArr.length,
+                    productId,
+                    categoryId: categoryToAdd.id,
+                    categoryItemId: item.id
+                })
+            })
+        })
+    })
+    console.log(itemsArr)
+
+    return itemsArr
+}

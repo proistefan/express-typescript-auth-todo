@@ -7,18 +7,18 @@ class TodoModel {
   static async create({description, userId}: ITodoAdd) {
     const db = await DbService.read()
 
-    const newToken: ITodo = {
+    const newTodo: ITodo = {
       id: db.todos.length,
       userId,
       description,
       completed: false
     }
 
-    db.todos.push(newToken)
+    db.todos.push(newTodo)
 
     await DbService.write(db)
 
-    return newToken
+    return newTodo
   }
 
   static async findOne({id, userId}: ITodoFindOne) {

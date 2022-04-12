@@ -7,5 +7,6 @@ export default function<T extends Error> (err: T, req: IRequestAuth, res: Respon
     if (err instanceof ApiException) {
         return res.status(err.status).json(setFailureResponse(err.message, err.errors))
     }
+    console.log(err)
     return res.status(500).json(setFailureResponse('Непредвиденная ошибка'))
 }

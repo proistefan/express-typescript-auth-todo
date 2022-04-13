@@ -27,12 +27,12 @@ class BasketController {
 
       const {id, quantity} = req.body
       
-      const newBasketItem = await basketModel.add({id, quantity}) || {}
+      const basket = await basketModel.add({id, quantity}) || []
       const sum = await basketModel.getSum()
       
       res.json(setSuccessResponse({
         sum,
-        item: newBasketItem
+        items: basket
       }))
     } catch (e) {
       next(e);

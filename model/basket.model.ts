@@ -19,7 +19,7 @@ class BasketModel {
 
       await DbService.write(db)
 
-      return existBasketItem
+      return db.basket
     } else {
       const foundProduct = db.products.find(item => item.id === id)
           
@@ -41,7 +41,7 @@ class BasketModel {
 
       await DbService.write(db)
 
-      return newBasketItem
+      return db.basket
     }
   }
 

@@ -70,11 +70,13 @@ class CatalogModel {
       }
     })
     
+    const pageCount = getPageCount(limit, filteredProducts.length)
+    
     filteredProducts = filteredProducts.slice((page - 1) * limit, page * limit)
 
     return {
       items: filteredProducts,
-      pageCount: getPageCount(limit, products.length)
+      pageCount
     }
   }
 

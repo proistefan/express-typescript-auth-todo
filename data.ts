@@ -543,6 +543,9 @@ function fillProducts() {
             ]
         }
 
+        console.log(JSON.stringify(productsToAddItem))
+        console.log(JSON.stringify(productItem))
+
         products.push(productItem)
         productsToAdd.push(productsToAddItem)
     }

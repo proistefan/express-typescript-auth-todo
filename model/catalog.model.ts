@@ -74,7 +74,7 @@ class CatalogModel {
 
     return {
       items: filteredProducts,
-      pageCount: getPageCount(limit, filteredProducts.length)
+      pageCount: getPageCount(limit, products.length)
     }
   }
 

@@ -2,44 +2,111 @@ import {IProduct} from "./type/product";
 import {ICategory, ICategoryItem, ICategoryProduct,} from "./type/categories";
 /* eslint-disable */
 
-export const products: IProduct[] = [
-    {
-        id: 0,
-        description: 'BMX Forward ZigZag (2021)',
-        image: `${process.env.API_URL}/upload/products/product4.png`,
-        price: 24000
-    },
+export const products1: IProduct[] = [
     {
         id: 1,
-        description: 'BMX Forward ZigZag (2020)',
+        description: 'CUBE Горный Детский',
         image: `${process.env.API_URL}/upload/products/product1.png`,
-        price: 34000
-    },
-    {
-        id: 2,
-        description: 'Горный велосипед Forward Quadro 27.5 3.0 (2019)',
-        image: `${process.env.API_URL}/upload/products/product2.png`,
-        price: 30000
-    },
-    {
-        id: 3,
-        description: 'Городской велосипед Bear Bike Амстердам (2019)',
-        image: `${process.env.API_URL}/upload/products/product3.png`,
         price: 15000
     },
     {
+        id: 2,
+        description: 'MERIDA Фэтбайк',
+        image: `${process.env.API_URL}/upload/products/product2.png`,
+        price: 34000
+    },
+    {
+        id: 3,
+        description: 'SUPERIOR Городской',
+        image: `${process.env.API_URL}/upload/products/product3.png`,
+        price: 30000
+    },
+    {
         id: 4,
-        description: 'BMX Forward ZigZag (2020)',
-        image: `${process.env.API_URL}/upload/products/product4.png`,
+        description: 'BERGAMONT Двухподвесный',
+        image: `${process.env.API_URL}/upload/products/product1.png`,
         price: 20000
     },
     {
         id: 5,
-        description: 'Городской велосипед Bear Bike Амстердам (2019)',
+        description: 'KONA Фэтбайк',
         image: `${process.env.API_URL}/upload/products/product2.png`,
         price: 40000
+    },
+    {
+        id: 6,
+        description: 'SPECIALIZED Женский',
+        image: `${process.env.API_URL}/upload/products/product3.png`,
+        price: 10000
+    },
+    {
+        id: 7,
+        description: 'PRIDE Двухподвесный',
+        image: `${process.env.API_URL}/upload/products/product4.png`,
+        price: 13500
+    },
+    {
+        id: 8,
+        description: 'BERGAMONT Городской',
+        image: `${process.env.API_URL}/upload/products/product1.png`,
+        price: 15500
+    },
+    {
+        id: 9,
+        description: 'CUBE Двухподвесный Горный Детский',
+        image: `${process.env.API_URL}/upload/products/product2.png`,
+        price: 16500
+    },
+    {
+        id: 10,
+        description: 'MERIDA Фэтбайк Женский',
+        image: `${process.env.API_URL}/upload/products/product3.png`,
+        price: 26500
+    },
+    {
+        id: 11,
+        description: 'BERGAMONT Двухподвесный',
+        image: `${process.env.API_URL}/upload/products/product1.png`,
+        price: 20000
+    },
+    {
+        id: 12,
+        description: 'KONA Фэтбайк',
+        image: `${process.env.API_URL}/upload/products/product2.png`,
+        price: 40000
+    },
+    {
+        id: 13,
+        description: 'SPECIALIZED Женский',
+        image: `${process.env.API_URL}/upload/products/product3.png`,
+        price: 10000
+    },
+    {
+        id: 14,
+        description: 'PRIDE Двухподвесный',
+        image: `${process.env.API_URL}/upload/products/product4.png`,
+        price: 13500
+    },
+    {
+        id: 15,
+        description: 'BERGAMONT Городской',
+        image: `${process.env.API_URL}/upload/products/product1.png`,
+        price: 15500
+    },
+    {
+        id: 16,
+        description: 'CUBE Двухподвесный Горный Детский',
+        image: `${process.env.API_URL}/upload/products/product2.png`,
+        price: 16500
+    },
+    {
+        id: 17,
+        description: 'MERIDA Фэтбайк Женский',
+        image: `${process.env.API_URL}/upload/products/product3.png`,
+        price: 26500
     }
 ]
+export const products: IProduct[] = []
 
 export const categories: ICategory[] = [
     {
@@ -144,70 +211,8 @@ export const categoryItems: ICategoryItem[] = [
         title: 'PRIDE'
     },
 ]
-// export const categoryProductList: ICategoryProduct[] = [
-//     {
-//         id: 0,
-//         productId: 0,
-//         categoryId: 0,
-//         categoryItemId: 0
-//     },
-//     {
-//         id: 1,
-//         productId: 0,
-//         categoryId: 0,
-//         categoryItemId: 1
-//     },
-//     {
-//         id: 2,
-//         productId: 1,
-//         categoryId: 0,
-//         categoryItemId: 1
-//     },
-//     {
-//         id: 3,
-//         productId: 1,
-//         categoryId: 0,
-//         categoryItemId: 0
-//     },
-//     {
-//         id: 4,
-//         productId: 1,
-//         categoryId: 1,
-//         categoryItemId: 11
-//     },
-//     {
-//         id: 5,
-//         productId: 2,
-//         categoryId: 1,
-//         categoryItemId: 10
-//     },
-//     {
-//         id: 6,
-//         productId: 3,
-//         categoryId: 1,
-//         categoryItemId: 9
-//     },
-//     {
-//         id: 7,
-//         productId: 4,
-//         categoryId: 1,
-//         categoryItemId: 6
-//     },
-//     {
-//         id: 8,
-//         productId: 5,
-//         categoryId: 1,
-//         categoryItemId: 7
-//     },
-//     {
-//         id: 9,
-//         productId: 5,
-//         categoryId: 1,
-//         categoryItemId: 8
-//     },
-// ]
 
-const productsToAdd: {
+const productsToAdd1: {
     id: IProduct['id']
     categories: {
         code: ICategory['code'],
@@ -219,7 +224,7 @@ const productsToAdd: {
         categories: [
             {
                 code: 'category',
-                items: ['gornie', 'gorodskie']
+                items: ['gornie', 'detskie']
             },
             {
                 code: 'brand',
@@ -232,19 +237,224 @@ const productsToAdd: {
         categories: [
             {
                 code: 'category',
-                items: ['fat', 'dvuhpodvesnie']
+                items: ['fat']
             },
             {
                 code: 'brand',
                 items: ['merida']
             }
         ]
-    }
+    },
+    {
+        id: 3,
+        categories: [
+            {
+                code: 'category',
+                items: ['gorodskie']
+            },
+            {
+                code: 'brand',
+                items: ['superior']
+            }
+        ]
+    },
+    {
+        id: 4,
+        categories: [
+            {
+                code: 'category',
+                items: ['dvuhpodvesnie']
+            },
+            {
+                code: 'brand',
+                items: ['bergamont']
+            }
+        ]
+    },
+    {
+        id: 5,
+        categories: [
+            {
+                code: 'category',
+                items: ['fat']
+            },
+            {
+                code: 'brand',
+                items: ['kona']
+            }
+        ]
+    },
+    {
+        id: 6,
+        categories: [
+            {
+                code: 'category',
+                items: ['jenskie']
+            },
+            {
+                code: 'brand',
+                items: ['specialized']
+            }
+        ]
+    },
+    {
+        id: 7,
+        categories: [
+            {
+                code: 'category',
+                items: ['dvuhpodvesnie']
+            },
+            {
+                code: 'brand',
+                items: ['pride']
+            }
+        ]
+    },
+    {
+        id: 8,
+        categories: [
+            {
+                code: 'category',
+                items: ['gorodskie']
+            },
+            {
+                code: 'brand',
+                items: ['bergamont']
+            }
+        ]
+    },
+    {
+        id: 9,
+        categories: [
+            {
+                code: 'category',
+                items: ['dvuhpodvesnie', 'gornie', 'detskie']
+            },
+            {
+                code: 'brand',
+                items: ['cube']
+            }
+        ]
+    },
+    {
+        id: 10,
+        categories: [
+            {
+                code: 'category',
+                items: ['fat', 'jenskie']
+            },
+            {
+                code: 'brand',
+                items: ['merida']
+            }
+        ]
+    },
+    {
+        id: 11,
+        categories: [
+            {
+                code: 'category',
+                items: ['dvuhpodvesnie']
+            },
+            {
+                code: 'brand',
+                items: ['bergamont']
+            }
+        ]
+    },
+    {
+        id: 12,
+        categories: [
+            {
+                code: 'category',
+                items: ['fat']
+            },
+            {
+                code: 'brand',
+                items: ['kona']
+            }
+        ]
+    },
+    {
+        id: 13,
+        categories: [
+            {
+                code: 'category',
+                items: ['jenskie']
+            },
+            {
+                code: 'brand',
+                items: ['specialized']
+            }
+        ]
+    },
+    {
+        id: 14,
+        categories: [
+            {
+                code: 'category',
+                items: ['dvuhpodvesnie']
+            },
+            {
+                code: 'brand',
+                items: ['pride']
+            }
+        ]
+    },
+    {
+        id: 15,
+        categories: [
+            {
+                code: 'category',
+                items: ['gorodskie']
+            },
+            {
+                code: 'brand',
+                items: ['bergamont']
+            }
+        ]
+    },
+    {
+        id: 16,
+        categories: [
+            {
+                code: 'category',
+                items: ['dvuhpodvesnie', 'gornie', 'detskie']
+            },
+            {
+                code: 'brand',
+                items: ['cube']
+            }
+        ]
+    },
+    {
+        id: 17,
+        categories: [
+            {
+                code: 'category',
+                items: ['fat', 'jenskie']
+            },
+            {
+                code: 'brand',
+                items: ['merida']
+            }
+        ]
+    },
 ]
+
+const productsToAdd: {
+    id: IProduct['id']
+    categories: {
+        code: ICategory['code'],
+        items: ICategoryItem['code'][]
+    }[]
+}[] = []
 
 export const categoryProductList: ICategoryProduct[] = addProducts()
 
 function addProducts() {
+    fillProducts()
+    
     const itemsArr: ICategoryProduct[] = []
     
     productsToAdd.forEach(product => {
@@ -271,7 +481,69 @@ function addProducts() {
             })
         })
     })
-    console.log(itemsArr)
 
     return itemsArr
 }
+
+function getRandomIntInclusive(min: number, max: number) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function fillProducts() {
+    function getRandomCategory() {
+        let categories2 = Array.from(categoryItems).filter(item => item.parentId === 1)
+
+        return categories2[getRandomIntInclusive(0, categories2.length - 1)]
+    }
+
+    function getRandomCategoryBrands() {
+        const categoriesLen = getRandomIntInclusive(1, 4)
+
+        let categoryItems2 = Array.from(categoryItems).filter(item => item.parentId === 0)
+
+        const categories2 = []
+
+        for (let i = 0; i < categoriesLen; i++) {
+            const randomNum = getRandomIntInclusive(0, categoryItems2.length - 1)
+            if (categoryItems2[randomNum]) {
+                categories2.push(categoryItems2[randomNum])
+                categoryItems2.splice(randomNum, 1)
+            }
+        }
+
+        return categories2
+    }
+
+    for (let i = 0; i < 100; i++) {
+        const category2 = getRandomCategory()
+        const categoryItems2 = getRandomCategoryBrands()
+
+        const description = `${category2.title} ${categoryItems2.map(item => item.title).join(' ')}`
+
+        const productItem = {
+            id: i,
+            description,
+            image: `${process.env.API_URL}/upload/products/product${getRandomIntInclusive(1, 4)}.png`,
+            price: getRandomIntInclusive(1, 60) * 1000
+        }
+
+        const productsToAddItem = {
+            id: i,
+            categories: [
+                {
+                    code: 'category',
+                    items: categoryItems2.map(item => item.code)
+                },
+                {
+                    code: 'brand',
+                    items: [category2.code]
+                }
+            ]
+        }
+
+        products.push(productItem)
+        productsToAdd.push(productsToAddItem)
+    }
+} 

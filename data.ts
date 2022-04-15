@@ -157,12 +157,19 @@ function fillItems() {
 
         const description = copy(`${category2.title} ${categoryItems2.map(item => item.title).join(' ')}`)
 
-        const productItem = {
+        const hasOldPrice = Math.random() < 0.2
+        
+        const productItem: IProduct = {
             id: i,
             description,
             image: `${process.env.API_URL}/upload/products/product${getRandomIntInclusive(1, 4)}.png`,
             price: getRandomIntInclusive(1, 60) * 1000
         }
+        
+        if (hasOldPrice) {
+            productItem.oldPrice = productItem.price + getRandomIntInclusive(1, 20) * 1000
+        }
+        
         productsFill.push(productItem)
 
         categoryProductListFill.push({

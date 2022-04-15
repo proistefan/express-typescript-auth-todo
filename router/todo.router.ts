@@ -3,6 +3,7 @@ import {Router} from "express";
 
 import todoController from "../controller/todo.controller";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const router = new Router();
 router.post('/',

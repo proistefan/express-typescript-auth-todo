@@ -3,6 +3,7 @@ export interface IProduct {
     image: string
     description: string
     price: number
+    oldPrice?: number
 }
 
 export interface IProductItems {

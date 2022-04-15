@@ -12,6 +12,7 @@ router.post('/',
   basketController.add
 );
 router.get('/', basketController.getAll);
+router.get('/clear', basketController.clear);
 router.delete('/:id',
     param('id').isString(),
     basketController.delete

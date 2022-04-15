@@ -29,9 +29,11 @@ class BasketController {
       
       const basket = await basketModel.add({id, quantity}) || []
       const sum = await basketModel.getSum()
+      const oldSum = await basketModel.getOldSum()
       
       res.json(setSuccessResponse({
         sum,
+        oldSum,
         items: basket
       }))
     } catch (e) {
@@ -44,10 +46,22 @@ class BasketController {
       const productId = +req.params.id
       await basketModel.delete({id: productId});
       const sum = await basketModel.getSum()
+      const oldSum = await basketModel.getOldSum()
       
       return res.json(setSuccessResponse({
-        sum
+        sum,
+        oldSum
       }));
+    } catch (e) {
+      next(e);
+    }
+  }
+  
+  async clear(req: IRequestBasketDelete, res: Response, next: NextFunction) {
+    try {
+      await basketModel.clear();
+
+      return res.json(setSuccessResponse());
     } catch (e) {
       next(e);
     }
@@ -57,9 +71,11 @@ class BasketController {
     try {
       const basketItems = await basketModel.findAll();
       const sum = await basketModel.getSum()
+      const oldSum = await basketModel.getOldSum()
       
       return res.json(setSuccessResponse({
         sum,
+        oldSum,
         items: basketItems,
       }));
     } catch (e) {

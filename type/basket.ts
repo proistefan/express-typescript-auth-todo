@@ -5,6 +5,7 @@ export interface IBasketItem {
     description: IProduct["description"]
     image: IProduct["image"]
     price: IProduct["price"]
+    oldPrice?: IProduct["oldPrice"]
     count: number
 }
 

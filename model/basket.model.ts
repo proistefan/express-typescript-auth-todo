@@ -1,6 +1,4 @@
 import DbService from "../service/db.service";
-import {ITodo, ITodoAdd, ITodoUpdate, IUserModel} from "../type";
-import {ITodoDelete, ITodoFindOne} from "../type/todo";
 import ApiException from "../exception/api.exception";
 import {IBasketAdd, IBasketDelete, IBasketItem} from "../type/basket";
 
@@ -27,13 +25,14 @@ class BasketModel {
         throw ApiException.BadRequest('Не найдено product с данным id')
       }
       
-      const {image, description, price} = foundProduct
+      const {image, description, price, oldPrice} = foundProduct
       
       const newBasketItem: IBasketItem = {
         id,
         count: quantity,
         description,
         image,
+        oldPrice,
         price
       }
       
@@ -49,7 +48,14 @@ class BasketModel {
     const db = await DbService.read()
     return db.basket
   }
-
+  
+  static async clear() {
+    const db = await DbService.read()
+    db.basket = []
+    await DbService.write(db)
+    return db.basket
+  }
+  
   static async delete({id}: IBasketDelete) {
     let db = await DbService.read()
     
@@ -67,7 +73,7 @@ class BasketModel {
   }
   
   static async getSum(): Promise<number> {
-    let db = await DbService.read()
+    const db = await DbService.read()
 
     let sum = 0
     
@@ -76,6 +82,17 @@ class BasketModel {
     })
 
     return sum
+  }
+
+  static async getOldSum(): Promise<number> {
+    const db = await DbService.read()
+    let oldSum = 0
+
+    db.basket.forEach(item => {
+      oldSum += (item.oldPrice || item.price) * item.count
+    })
+
+    return oldSum
   }
 }
 

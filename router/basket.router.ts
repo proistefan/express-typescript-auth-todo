@@ -3,8 +3,9 @@ import {Router} from "express";
 
 import basketController from "../controller/basket.controller";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const router = new Router();
+const router: Router = new Router();
 router.post('/',
   body('id').isNumeric(),
   body('quantity').isNumeric(),

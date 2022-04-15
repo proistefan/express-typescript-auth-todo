@@ -1,8 +1,7 @@
 import DbService from "../service/db.service";
 import {ICatalogItems, ICatalogOptions, IFilterItem} from "../type/catalog";
-import {ICategory, ICategoryItem} from "../type/categories";
+import {ICategory, ICategoryItem, ICategoryProduct} from "../type/categories";
 import {IProduct} from "../type/product";
-import {categoryItems, categoryProductList} from "../data";
 import {getPageCount} from "../utils";
 import {IDb} from "../type/db";
 
@@ -10,7 +9,7 @@ class CatalogModel {
   static async getItems({page, limit, sort, filters}: ICatalogOptions): Promise<ICatalogItems> {
     const db = await DbService.read()
 
-    const { categories, products, basket } = db
+    const { categories, products, basket, categoryProductList, categoryItems } = db
     
     let filteredProducts: ICatalogItems['items']
 
@@ -22,7 +21,7 @@ class CatalogModel {
         for (let i = 0; i < filters.length; i++) {
           const {code, items} = filters[i]
 
-          if (!CatalogModel.isItemInCategory(code, items, id, categories)) {
+          if (!CatalogModel.isItemInCategory(code, items, id, categories, categoryProductList, categoryItems)) {
             isItemInFilter = false
             break
           }
@@ -110,7 +109,9 @@ class CatalogModel {
       categoryCode: ICategory['code'],
       categoryItemsCode: ICategoryItem['code'][],
       productId: IProduct['id'],
-      categories: ICategory[]
+      categories: ICategory[], 
+      categoryProductList: ICategoryProduct[], 
+      categoryItems: ICategoryItem[]
   ): boolean {
     const category = categories.find(item => item.code === categoryCode)
 
@@ -119,7 +120,7 @@ class CatalogModel {
     }
 
     const foundCategoriesProduct = categoryProductList.filter(item => item.categoryId === category?.id && item.productId === productId)
-
+    
     if (!foundCategoriesProduct.length) {
       return false
     }

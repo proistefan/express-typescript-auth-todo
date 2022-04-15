@@ -9,9 +9,9 @@ const initialDb: IDb = {
   tokens: [],
   todos: [],
   basket: [],
-  products,
   categories,
   categoryItems,
+  products,
   categoryProductList,
 }
 

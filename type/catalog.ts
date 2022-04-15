@@ -8,9 +8,15 @@ export interface ICatalogOptions {
     filters: ICatalogOptionsFilterItem[]
 }
 
-export interface ICatalogOptionsFilterItem {
-    code: string,
+export type ICatalogOptionsFilterItem = {
+    code: string
+    type: 'checkbox'
     items: string[]
+} | {
+    code: string
+    type: 'range'
+    min: number
+    max: number
 }
 
 export interface ICatalogItems {

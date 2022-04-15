@@ -19,11 +19,29 @@ class CatalogModel {
         const id = product.id
 
         for (let i = 0; i < filters.length; i++) {
-          const {code, items} = filters[i]
+          const filterItem = filters[i]
+          
+          if (filterItem.type === 'range') {
+            const category = categories.find(item => item.code === filterItem.code)
+            
+            if (category && category.type === 'range') {
+              const {min, max} = filterItem
+              const product = products.find(product => product.id === id)
 
-          if (!CatalogModel.isItemInCategory(code, items, id, categories, categoryProductList, categoryItems)) {
-            isItemInFilter = false
-            break
+              if (!product) {
+                return false
+              }
+
+              return product.price > min && product.price < max
+            }
+            
+          } else if (filterItem.type === 'checkbox') {
+            const {items} = filterItem
+
+            if (!CatalogModel.isItemInCategory(filterItem.code, items, id, categories, categoryProductList, categoryItems)) {
+              isItemInFilter = false
+              break
+            }
           }
         }
 
@@ -114,10 +132,6 @@ class CatalogModel {
       categoryItems: ICategoryItem[]
   ): boolean {
     const category = categories.find(item => item.code === categoryCode)
-
-    if (category?.type === 'range') {
-      return true
-    }
 
     const foundCategoriesProduct = categoryProductList.filter(item => item.categoryId === category?.id && item.productId === productId)
     

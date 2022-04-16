@@ -28,12 +28,22 @@ export type ICatalogItem = IProduct & {
     inBasket: boolean
 }
 
-export interface IFilterItem {
+export type IFilterItem = IFilterItemCheckbox | IFilterItemRange
+
+interface IFilterItemCheckbox {
     title: ICategory['code']
-    code: ICategoryItem['code'][keyof ICategoryItem['code']],
-    type: ICategory['type'],
+    code: ICategoryItem['code'][keyof ICategoryItem['code']]
+    type: 'checkbox'
     items: {
         title: ICategoryItem['title']
         code: ICategoryItem['code']
     }[]
+}
+
+interface IFilterItemRange {
+    title: ICategory['code']
+    code: ICategoryItem['code'][keyof ICategoryItem['code']]
+    type: 'range'
+    min: number
+    max: number
 }

@@ -105,19 +105,42 @@ class CatalogModel {
     db.categories.forEach(category => {
       const {id, title, code, type} = category
       
-      const categoryItems = db.categoryItems.filter(categoryItem => categoryItem.parentId === id)
-      
-      const items = categoryItems.map(categoryItem => ({
-        code: categoryItem.code, 
-        title: categoryItem.title
-      }))
-      
-      filters.push({
-        title,
-        code,
-        type,
-        items,
-      })
+      if (type === 'checkbox') {
+        const categoryItems = db.categoryItems.filter(categoryItem => categoryItem.parentId === id)
+
+        const items = categoryItems.map(categoryItem => ({
+          code: categoryItem.code,
+          title: categoryItem.title
+        }))
+
+        filters.push({
+          title,
+          code,
+          type,
+          items,
+        })
+      } else if (type === 'range') {
+        let min = 0
+        let max = 0
+        
+        db.products.forEach(product => {
+          if (!min || min > product.price) {
+            min = product.price
+          }
+          
+          if (!min || max < product.price) {
+            max = product.price
+          }
+        })
+        
+        filters.push({
+          title,
+          code,
+          type,
+          min,
+          max
+        })
+      }
     })
     
     return filters

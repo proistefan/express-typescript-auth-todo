@@ -1,12 +1,12 @@
-import {Response, NextFunction} from "express";
+import {Response} from "express";
 import ApiException from "../exception/api.exception";
 import {IRequestAuth} from "./auth.middleware";
 import {setFailureResponse} from "../utils";
 
-export default function<T extends Error> (err: T, req: IRequestAuth, res: Response, next: NextFunction) {
-    if (err instanceof ApiException) {
-        return res.status(err.status).json(setFailureResponse(err.message, err.errors))
+export default function<T extends Error> (e: T, req: IRequestAuth, res: Response) {
+    if (e instanceof ApiException) {
+        return res.status(e.status).json(setFailureResponse(e.message, e.errors))
     }
-    console.log(err)
+    console.log(e)
     return res.status(500).json(setFailureResponse('Непредвиденная ошибка'))
 }

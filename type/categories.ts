@@ -7,22 +7,11 @@ export interface ICategoryProduct {
     categoryItemId?: number
 }
 
-export type ICategory = ICategoryCheckbox | ICategoryRange
-
-export interface ICategoryCheckbox {
+export interface ICategory {
     id: number
     code: string
     title: string
-    type: 'checkbox'
-}
-
-export interface ICategoryRange {
-    id: number
-    code: string
-    title: string
-    type: 'range'
-    min: number
-    max: number
+    type: 'checkbox' | 'range'
 }
 
 export interface ICategoryItem {

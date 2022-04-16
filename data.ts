@@ -14,6 +14,12 @@ export const categories: ICategory[] = [
         title: 'Бренд',
         code: 'brand',
         type: 'checkbox'
+    },
+    {
+        id: 2,
+        title: 'Цена',
+        code: 'price',
+        type: 'range'
     }
 ]
 

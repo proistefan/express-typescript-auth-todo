@@ -10,13 +10,8 @@ export interface ICatalogOptions {
 
 export type ICatalogOptionsFilterItem = {
     code: string
-    type: 'checkbox'
+    type: 'checkbox' | 'range'
     items: string[]
-} | {
-    code: string
-    type: 'range'
-    min: number
-    max: number
 }
 
 export interface ICatalogItems {

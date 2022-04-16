@@ -124,7 +124,7 @@ function fillItems() {
     }
 
     function getRandomCategoryBrands() {
-        const categoriesLen = getRandomIntInclusive(1, 2)
+        const categoriesLen = getRandomIntInclusive(1, 4)
 
         let categoryItems2 = Array.from(categoryItems).filter(item => item.parentId === 0)
 

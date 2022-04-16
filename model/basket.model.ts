@@ -57,7 +57,7 @@ class BasketModel {
   }
   
   static async delete({id}: IBasketDelete) {
-    let db = await DbService.read()
+    const db = await DbService.read()
     
     const foundBasketItem = db.basket.find(item => item.id === id)
 
@@ -69,7 +69,7 @@ class BasketModel {
 
     await DbService.write(db)
 
-    return
+    return db.basket
   }
   
   static async getSum(): Promise<number> {

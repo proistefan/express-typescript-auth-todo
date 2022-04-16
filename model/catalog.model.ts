@@ -25,14 +25,14 @@ class CatalogModel {
             const category = categories.find(item => item.code === filterItem.code)
             
             if (category && category.type === 'range') {
-              const {min, max} = filterItem
+              const [min, max] = filterItem.items
               const product = products.find(product => product.id === id)
 
               if (!product) {
                 return false
               }
 
-              return product.price > min && product.price < max
+              return product.price > +min && product.price < +max
             }
             
           } else if (filterItem.type === 'checkbox') {

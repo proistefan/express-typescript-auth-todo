@@ -149,7 +149,7 @@ function fillItems() {
     const categoryProductListFill: ICategoryProduct[] = []
     let categoryProductListId = 0
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 300; i++) {
         const category2: ICategoryItem = copy(getRandomCategory())
         const categoryItems2: ICategoryItem[] = copy(getRandomCategoryBrands())
 

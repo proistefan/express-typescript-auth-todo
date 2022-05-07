@@ -6,15 +6,21 @@ import {getPageCount} from "../utils";
 import {IDb} from "../type/db";
 
 class CatalogModel {
-  static async getItems({page, limit, sort, filters}: ICatalogOptions): Promise<ICatalogItems> {
+  static async getItems({page, limit, sort, filters, query}: ICatalogOptions): Promise<ICatalogItems> {
     const db = await DbService.read()
 
     const { categories, products, basket, categoryProductList, categoryItems } = db
     
+    let usedProducts: IProduct[] = Array.from(products)
+    
     let filteredProducts: ICatalogItems['items']
+    
+    if (query) {
+      usedProducts = usedProducts.filter(product => product.description.includes(query))
+    }
 
     if (filters.length) {
-      filteredProducts = products.filter(product => {
+      filteredProducts = usedProducts.filter(product => {        
         let isItemInFilter = true
         const id = product.id
 
@@ -51,7 +57,7 @@ class CatalogModel {
         inBasket: CatalogModel.isItemInBasket(product.id, basket)
       }))
     } else {
-      filteredProducts = products.map(product => ({
+      filteredProducts = usedProducts.map(product => ({
         ...product,
         inBasket: CatalogModel.isItemInBasket(product.id, basket)
       }))

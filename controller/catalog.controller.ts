@@ -18,9 +18,9 @@ class CatalogController {
                 return next(ApiException.BadRequest('Ошибка при валидации', errors.array()))
             }
             
-            const {page, limit, sort, filters} = req.body as ICatalogOptions
+            const {page, limit, sort, filters, query} = req.body as ICatalogOptions
 
-            const {items, pageCount} = await CatalogModel.getItems({page, limit, sort, filters})
+            const {items, pageCount} = await CatalogModel.getItems({page, limit, sort, filters, query})
             
             res.json(setSuccessResponse({
                 items,

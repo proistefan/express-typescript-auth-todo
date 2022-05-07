@@ -6,6 +6,7 @@ export interface ICatalogOptions {
     limit: number
     sort: 'alp' | 'price-up' | 'price-down'
     filters: ICatalogOptionsFilterItem[]
+    query?: string
 }
 
 export type ICatalogOptionsFilterItem = {
